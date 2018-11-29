@@ -1,21 +1,16 @@
-pipeline {
-    agent {
-      label 'maven'
-    }
-  stages {
-    stage('Build App') {
-      steps {
-        sh 'ls'
+node(''){
+    stage('Deploy App') {
         script{
-        openshift.withCluster() {
+        openshift.withCluster('staging-cluster') {
             openshift.withProject() {
+                
                 sh "oc whoami"
                 sh "oc projects"
-                
-                  }
-                }
-             }
-          }
-         }
-      }
+               
+ 
+
+            }
+        }
     }
+}
+}
